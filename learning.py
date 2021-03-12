@@ -2,11 +2,6 @@ import os
 
 import utils as utils
 
-# x - inputs
-# y - outputs
-# w - weights
-#
-
 
 def activate_neurons(z):
     for i in range(10):
@@ -41,9 +36,6 @@ target_number = int(input("Введите целевое число: "))
 # Из введенного числа создается имя файла для входных данных
 
 # Считываем входные данные
-
-# Идея: реализовать полиморфизм для разных типов файлов
-
 x = []
 
 mode = input("Введите формат файла - txt или png ")
@@ -93,6 +85,3 @@ while epoch > 0:
     utils.write_array_to_file_in_many_lines(new_weights, "weights.txt")
 
     epoch = epoch - 1
-
-# TODO: проверить новосозданные функции на колв-во аргументов и возвращаемые значения
-# TODO: придумать демонстрацию изменений во време эпохи (надо ли ?)
