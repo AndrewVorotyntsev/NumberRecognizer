@@ -46,3 +46,4 @@ z = activate_neurons(z)
 
 # Функция отображения результата работы нейронов
 utils.show_neuron_reaction(z)
+

@@ -80,10 +80,12 @@ def multiply_matrices(a, b):
 
 
 def show_neuron_reaction(z):
+    reacted_neurons = []
     for i in range(len(z)):
         if z[i] == 1:
+            reacted_neurons.append(i)
             print("Отреагировал нейрон", i)
-
+    return reacted_neurons
 
 def create_matrix_of_pixels(w):
     q = []

@@ -8,6 +8,8 @@ import utils as utils
 #
 
 
+# Идея реализовать класс Learner. Его свойства - атрибуты: порог, темп обучения
+
 def activate_neurons(z):
     for i in range(10):
         # Берем некоторый порог
@@ -35,6 +37,28 @@ def calculate_new_weights(previous_weights, errors, x):
             new_weights[i].append(round(this_new_weight, 4))
     return new_weights
 
+
+def learn(x):
+    # Считываем веса
+    weights = utils.read_file_to_two_dimensional_array_of_floats("weights.txt")
+
+    # Перемножение входных данных на веса
+    z = utils.multiply_matrices(x, weights)
+
+    # Функция активации
+    z = activate_neurons(z)
+
+    utils.show_neuron_reaction(z)
+
+    # Расчет ошибок
+    errors = calculate_errors(target, target_number, z)
+
+
+    # Перерасчет весов
+    new_weights = calculate_new_weights(weights, errors, x)
+
+    # Запись новых весов
+    utils.write_array_to_file_in_many_lines(new_weights, "weights.txt")
 
 # Ввод целевого числа
 target_number = int(input("Введите целевое число: "))
@@ -85,7 +109,9 @@ while epoch > 0:
 
     # Расчет ошибок
     errors = calculate_errors(target, target_number, z)
+    print(z, "Отреагировали ")
 
+    print(errors, "Ошибки")
     # Перерасчет весов
     new_weights = calculate_new_weights(weights, errors, x)
 
@@ -94,5 +120,10 @@ while epoch > 0:
 
     epoch = epoch - 1
 
-# TODO: проверить новосозданные функции на колв-во аргументов и возвращаемые значения
+
 # TODO: придумать демонстрацию изменений во време эпохи (надо ли ?)
+
+# TODO: реализовать цикл прохода 1000 раз по каждой цифре
+# Учим 1000 раз : выучи 1 один раз, выучи 2 один раз и т.д.
+# Для того, чтобы сеть не зазубривала только одну цифру, забывая остальные
+# Как вариант, под конец можно сделать не-обучение (это не 1, это не 2 и т.д)
